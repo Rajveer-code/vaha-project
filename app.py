@@ -88,3 +88,27 @@ def api_metrics():
         'scheduledServices': scheduled,
         'avgUptime': round(random.uniform(94.5, 97.2), 1)
     })
+
+AGENT_LOG_ENTRIES = []
+def get_agent_log():
+    agents = ["MasterAgent","DataAnalysisAgent","DiagnosisAgent","SchedulingAgent","HERAAgent","FeedbackAgent"]
+    actions = [
+        "Telemetry ingested for MH-01-AB-1234 — brake pressure drop detected",
+        "RUL prediction complete: 8 days remaining — escalating to DiagnosisAgent",
+        "Diagnosis confirmed: brake pad wear threshold exceeded",
+        "Checking Hero World Andheri availability — Thursday 2pm slot open",
+        "HERA outbound call initiated for Rajesh Kumar",
+        "Appointment confirmed and SMS sent to +91-9876543210",
+        "Manufacturing feedback queued: AutoParts India batch ID AP2024-B112",
+        "UEBA baseline check passed for all active agents",
+    ]
+    now = datetime.now()
+    entries = []
+    for i, (agent, action) in enumerate(zip(agents, actions)):
+        ts = (now - timedelta(seconds=i*47)).strftime("%H:%M:%S")
+        entries.append({"timestamp": ts, "agent": agent, "message": action})
+    return entries
+
+@app.route('/api/agent-log')
+def api_agent_log():
+    return jsonify(get_agent_log())
