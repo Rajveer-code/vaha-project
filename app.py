@@ -9,3 +9,62 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+import random
+from datetime import datetime, timedelta
+
+VEHICLES = [
+    {"id":"MH-01-AB-1234","model":"Hero Splendor+","owner":"Rajesh Kumar","phone":"+91-9876543210",
+     "type":"two-wheeler","location":"Andheri, Mumbai","mileage":24500,"riskLevel":"high",
+     "predictedIssue":"Brake Pad Wear","daysLeft":8,"confidence":0.91,
+     "bookingStatus":"confirmed","nextService":"Oct 24, 2025, 2:00 PM",
+     "vin":"MBLHA10E09H123456","lastService":"Jul 2025",
+     "telemetry":{"engine_temp":"87°C","battery_voltage":"12.4V","brake_pressure":"67%","tire_pressure_front":"28 PSI","tire_pressure_rear":"30 PSI","fuel_level":"45%","odometer":"24,500 km","last_updated":"2 min ago"}},
+    {"id":"DL-05-CD-5678","model":"Mahindra XUV700","owner":"Priya Sharma","phone":"+91-9765432101",
+     "type":"four-wheeler","location":"Connaught Place, Delhi","mileage":18200,"riskLevel":"medium",
+     "predictedIssue":"Chain Lubrication","daysLeft":22,"confidence":0.78,
+     "bookingStatus":"pending","nextService":None,
+     "vin":"MA1YS2HGXM7000123","lastService":"May 2025",
+     "telemetry":{"engine_temp":"76°C","battery_voltage":"13.1V","brake_pressure":"85%","tire_pressure_front":"35 PSI","tire_pressure_rear":"35 PSI","fuel_level":"72%","odometer":"18,200 km","last_updated":"5 min ago"}},
+    {"id":"KA-03-EF-9012","model":"Hero HF Deluxe","owner":"Amit Patel","phone":"+91-9654321012",
+     "type":"two-wheeler","location":"Koramangala, Bangalore","mileage":31200,"riskLevel":"low",
+     "predictedIssue":"Routine Maintenance","daysLeft":45,"confidence":0.65,
+     "bookingStatus":"scheduled","nextService":"Nov 10, 2025",
+     "vin":"MBLHA10EX9H234567","lastService":"Aug 2025",
+     "telemetry":{"engine_temp":"72°C","battery_voltage":"12.8V","brake_pressure":"91%","tire_pressure_front":"29 PSI","tire_pressure_rear":"31 PSI","fuel_level":"33%","odometer":"31,200 km","last_updated":"1 min ago"}},
+]
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+@app.route('/vehicles')
+def vehicles():
+    return render_template('vehicles.html')
+
+@app.route('/hera')
+def hera():
+    return render_template('hera.html')
+
+@app.route('/service-centers')
+def service_centers():
+    return render_template('service_centers.html')
+
+@app.route('/manufacturing')
+def manufacturing():
+    return render_template('manufacturing.html')
+
+@app.route('/ueba')
+def ueba():
+    return render_template('ueba.html')
+
+@app.route('/analytics')
+def analytics():
+    return render_template('analytics.html')
+
+@app.route('/vehicle/<vehicle_id>')
+def vehicle_detail(vehicle_id):
+    vehicle = next((v for v in VEHICLES if v['id'] == vehicle_id), None)
+    if not vehicle:
+        return "Vehicle not found", 404
+    return render_template('vehicle_detail.html', vehicle=vehicle)
