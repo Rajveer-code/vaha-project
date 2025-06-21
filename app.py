@@ -68,3 +68,23 @@ def vehicle_detail(vehicle_id):
     if not vehicle:
         return "Vehicle not found", 404
     return render_template('vehicle_detail.html', vehicle=vehicle)
+
+@app.route('/api/vehicles')
+def api_vehicles():
+    data = []
+    for v in VEHICLES:
+        vd = dict(v)
+        vd['daysLeft'] = max(1, v['daysLeft'] + random.randint(-1,1))
+        data.append(vd)
+    return jsonify(data)
+
+@app.route('/api/metrics')
+def api_metrics():
+    high_risk = sum(1 for v in VEHICLES if v['riskLevel']=='high')
+    scheduled = sum(1 for v in VEHICLES if v['bookingStatus'] in ['confirmed','scheduled','booked'])
+    return jsonify({
+        'totalVehicles': len(VEHICLES),
+        'highRisk': high_risk,
+        'scheduledServices': scheduled,
+        'avgUptime': round(random.uniform(94.5, 97.2), 1)
+    })
