@@ -1,1 +1,33 @@
-/* VAHA styles — work in progress */
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1e40af;
+    --secondary: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #10b981;
+    --dark: #1f2937;
+    --light: #f9fafb;
+    --border: #e5e7eb;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #1f2937;
+}
+.navbar {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.nav-container { max-width:1400px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; }
+.nav-brand { display:flex; align-items:center; gap:1rem; text-decoration:none; color:var(--primary); font-size:1.5rem; font-weight:700; }
+.nav-links { display:flex; gap:2rem; list-style:none; }
+.nav-links a { text-decoration:none; color:#4b5563; font-weight:500; padding:0.5rem 1rem; border-radius:0.5rem; transition:all 0.3s; }
+.nav-links a:hover, .nav-links a.active { background:var(--primary); color:white; }
+.container { max-width:1400px; margin:2rem auto; padding:0 2rem; }
