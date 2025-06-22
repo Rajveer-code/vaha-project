@@ -53,3 +53,13 @@ body {
 .badge-warning { background:#fef3c7; color:#92400e; }
 .badge-danger { background:#fee2e2; color:#991b1b; }
 .badge-info { background:#dbeafe; color:#1e40af; }
+.hero { background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); color:white; padding:4rem 2rem; border-radius:1.5rem; margin-bottom:2rem; text-align:center; }
+.hero h1 { font-size:3rem; font-weight:800; margin-bottom:1rem; }
+.hero p { font-size:1.25rem; opacity:0.95; }
+.grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:1.5rem; }
+.grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; }
+.metrics-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin-bottom:2rem; }
+.metric-card { background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%); color:white; padding:1.5rem; border-radius:1rem; box-shadow:0 10px 15px -3px rgba(0,0,0,0.1); }
+.metric-value { font-size:2.5rem; font-weight:700; margin-bottom:0.5rem; }
+.metric-label { font-size:0.875rem; opacity:0.9; }
+.metric-icon { width:48px; height:48px; background:rgba(255,255,255,0.2); border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; }
