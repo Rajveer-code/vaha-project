@@ -123,3 +123,19 @@ def api_fleet_history():
         dates.append(d.strftime('%b %d'))
         high_risk.append(random.randint(2, 7))
     return jsonify({'dates': dates, 'highRiskVehicles': high_risk})
+
+SERVICE_CENTERS = [
+    {"id":"SC001","name":"Hero World Andheri","address":"Link Road, Andheri West, Mumbai","phone":"022-2673-4521",
+     "capacity":12,"current_load":9,"avg_rating":4.7,"weekday_util":75,"weekend_util":140,
+     "services":["General Service","Brake Repair","Engine Overhaul","Oil Change","Tyre Service"]},
+    {"id":"SC002","name":"Hero Service Bandra","address":"SV Road, Bandra, Mumbai","phone":"022-2655-8899",
+     "capacity":8,"current_load":5,"avg_rating":4.5,"weekday_util":60,"weekend_util":110,
+     "services":["General Service","Brake Repair","Oil Change","Electrical"]},
+    {"id":"SC003","name":"Mahindra Service Powai","address":"Hiranandani, Powai, Mumbai","phone":"022-2570-3344",
+     "capacity":15,"current_load":11,"avg_rating":4.8,"weekday_util":72,"weekend_util":95,
+     "services":["General Service","Engine Overhaul","AC Service","Tyre","Body Work"]},
+]
+
+@app.route('/api/service-centers')
+def api_service_centers():
+    return jsonify(SERVICE_CENTERS)
