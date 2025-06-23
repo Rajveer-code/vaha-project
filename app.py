@@ -112,3 +112,14 @@ def get_agent_log():
 @app.route('/api/agent-log')
 def api_agent_log():
     return jsonify(get_agent_log())
+
+@app.route('/api/fleet-history')
+def api_fleet_history():
+    dates = []
+    high_risk = []
+    base = datetime.now()
+    for i in range(29, -1, -1):
+        d = base - timedelta(days=i)
+        dates.append(d.strftime('%b %d'))
+        high_risk.append(random.randint(2, 7))
+    return jsonify({'dates': dates, 'highRiskVehicles': high_risk})
