@@ -99,3 +99,12 @@ async function createServiceCenterChart() {
         });
     } catch(e) { console.error(e); }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadVehicles();
+    loadAgentLog();
+    createFleetHealthChart();
+    createServiceCenterChart();
+    setInterval(loadVehicles, 10000);
+    setInterval(loadAgentLog, 2000);
+});
