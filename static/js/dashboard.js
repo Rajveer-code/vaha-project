@@ -66,3 +66,36 @@ async function loadAgentLog() {
         if (atBottom) el.scrollTop = el.scrollHeight;
     } catch(e) { console.error(e); }
 }
+
+async function createFleetHealthChart() {
+    try {
+        const r = await fetch('/api/fleet-history');
+        const d = await r.json();
+        const ctx = document.getElementById('fleet-health-chart').getContext('2d');
+        if (fleetHealthChart) fleetHealthChart.destroy();
+        fleetHealthChart = new Chart(ctx, {
+            type:'line',
+            data:{ labels:d.dates, datasets:[{label:'High Risk Vehicles',data:d.highRiskVehicles,borderColor:'rgb(239,68,68)',backgroundColor:'rgba(239,68,68,0.1)',tension:0.4,fill:true}]},
+            options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,max:10,ticks:{stepSize:1}}}}
+        });
+    } catch(e) { console.error(e); }
+}
+
+async function createServiceCenterChart() {
+    try {
+        const r = await fetch('/api/service-centers');
+        const centers = await r.json();
+        const ctx = document.getElementById('service-center-chart').getContext('2d');
+        if (serviceCenterChart) serviceCenterChart.destroy();
+        serviceCenterChart = new Chart(ctx, {
+            type:'bar',
+            data:{
+                labels:centers.map(c=>c.name.split(' ')[0]),
+                datasets:[
+                    {label:'Weekday %',data:centers.map(c=>c.weekday_util),backgroundColor:'rgba(16,185,129,0.7)',borderColor:'rgb(16,185,129)',borderWidth:2},
+                    {label:'Weekend %',data:centers.map(c=>c.weekend_util),backgroundColor:'rgba(239,68,68,0.7)',borderColor:'rgb(239,68,68)',borderWidth:2}
+                ]},
+            options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,max:160,ticks:{callback:v=>v+'%'}}}}
+        });
+    } catch(e) { console.error(e); }
+}
