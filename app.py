@@ -139,3 +139,20 @@ SERVICE_CENTERS = [
 @app.route('/api/service-centers')
 def api_service_centers():
     return jsonify(SERVICE_CENTERS)
+# hera calls api added
+
+HERA_CALLS = [
+    {"vehicle_id":"MH-01-AB-1234","owner":"Rajesh Kumar","timestamp":"Today, 10:32 AM",
+     "language":"Hindi","duration":"2:18","status":"Completed","outcome":"Confirmed",
+     "transcript":[
+         {"speaker":"HERA","text":"Namaste Rajesh ji! Main HERA hun, aapki Hero Splendor ki swasthya sahayak. Kya aap 2 minute baat kar sakte hain?","time":"10:32:05","sentiment":"friendly"},
+         {"speaker":"Customer","text":"Haan, boliye.","time":"10:32:12","sentiment":"neutral"},
+         {"speaker":"HERA","text":"Humne dekha ki aapke brake pads tez ghis rahe hain. Agle 8 din mein service zaroori hai. Hero World Andheri mein Thursday 2 baje slot available hai, sirf 50 min lagega. 15% discount bhi hai. Kya main book kar dun?","time":"10:32:18","sentiment":"informative"},
+         {"speaker":"Customer","text":"Haan book kar do.","time":"10:33:01","sentiment":"satisfied"},
+         {"speaker":"HERA","text":"Aapka booking confirm hai 24 Oct 2 baje Hero World Andheri. SMS aayega. Surakshit chalayein!","time":"10:33:08","sentiment":"caring"},
+     ]},
+]
+
+@app.route('/api/hera-calls')
+def api_hera_calls():
+    return jsonify(HERA_CALLS)
