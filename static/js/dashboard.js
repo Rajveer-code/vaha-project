@@ -55,3 +55,14 @@ async function loadVehicles() {
         previousVehicleData = JSON.parse(JSON.stringify(vehicles));
     } catch(e) { console.error(e); }
 }
+
+async function loadAgentLog() {
+    try {
+        const r = await fetch('/api/agent-log');
+        const logs = await r.json();
+        const el = document.getElementById('agent-log');
+        const atBottom = el.scrollHeight - el.clientHeight <= el.scrollTop + 1;
+        el.innerHTML = logs.map(l => `<div class="log-entry"><span style="color:#6b7280;font-weight:600;">[${l.timestamp}]</span> <span style="color:#fbbf24;font-weight:700;">${l.agent}:</span> <span style="color:#10b981;">${l.message}</span></div>`).join('');
+        if (atBottom) el.scrollTop = el.scrollHeight;
+    } catch(e) { console.error(e); }
+}
