@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Vehicles - VAHA{% endblock %}
+{% block extra_js %}<script src="{{ url_for('static', filename='js/vehicles.js') }}"></script>{% endblock %}
+{% block content %}
+<div class="container">
+    <h1 style="color:white;margin-bottom:2rem;font-size:2.5rem;font-weight:800;">Fleet Management</h1>
+    <div class="card">
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+            <input type="text" id="search" placeholder="Search vehicle, owner, location..." style="flex:1;padding:0.75rem;border:1px solid #e5e7eb;border-radius:0.5rem;min-width:300px;">
+            <select id="risk-filter" style="padding:0.75rem;border:1px solid #e5e7eb;border-radius:0.5rem;"><option value="">All Risk Levels</option><option value="high">High Risk</option><option value="medium">Medium Risk</option><option value="low">Low Risk</option></select>
+            <select id="type-filter" style="padding:0.75rem;border:1px solid #e5e7eb;border-radius:0.5rem;"><option value="">All Types</option><option value="two-wheeler">Two-Wheeler</option><option value="four-wheeler">Four-Wheeler</option></select>
+        </div>
+    </div>
+    <div id="vehicles-grid" class="grid-3"></div>
+</div>
+{% endblock %}
