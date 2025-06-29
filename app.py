@@ -181,3 +181,26 @@ MANUFACTURING_INSIGHTS = [
 @app.route('/api/manufacturing-insights')
 def api_manufacturing_insights():
     return jsonify(MANUFACTURING_INSIGHTS)
+
+UEBA_ALERTS = [
+    {"id":"UEBA-001","agent":"SchedulingAgent","agent_id":"SA-007","action":"Attempted unauthorized access to raw telemetry database",
+     "timestamp":"Today, 09:14 AM","details":"SA-007 attempted to query TELEMETRY_RAW table — outside normal permission scope",
+     "response":"Action blocked. Agent isolated for review.","severity":"Critical","status":"Blocked","actionable":True},
+    {"id":"UEBA-002","agent":"DataAnalysisAgent","agent_id":"DAA-003","action":"Off-hours API call spike detected",
+     "timestamp":"Today, 03:22 AM","details":"287 API calls between 3-4 AM — 400% above baseline",
+     "response":"Flagged for review. Rate limiting applied.","severity":"Medium","status":"Monitored","actionable":True},
+]
+
+@app.route('/api/ueba-alerts')
+def api_ueba_alerts():
+    return jsonify(UEBA_ALERTS)
+
+@app.route('/api/ueba-action', methods=['POST'])
+def api_ueba_action():
+    data = request.get_json()
+    alert_id = data.get('alert_id')
+    action = data.get('action')
+    for alert in UEBA_ALERTS:
+        if alert['id'] == alert_id:
+            alert['status'] = 'Quarantined' if action == 'quarantine' else 'Dismissed'
+    return jsonify({'success': True, 'message': f'Alert {alert_id} {action}d successfully'})
