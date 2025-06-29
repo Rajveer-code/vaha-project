@@ -156,3 +156,28 @@ HERA_CALLS = [
 @app.route('/api/hera-calls')
 def api_hera_calls():
     return jsonify(HERA_CALLS)
+
+MANUFACTURING_INSIGHTS = [
+    {"id":"RCA-2024-001","component":"Brake Pad","priority":"High","frequency":47,
+     "affected_vehicles":47,"root_cause":"Grade A material under-specification for monsoon conditions",
+     "recommendation":"Switch to Grade B ceramic compound and update supplier spec sheet",
+     "supplier":"AutoParts India Ltd","supplier_code":"API-BP-GR-A",
+     "projected_savings":"₹12.5L","capa_ticket":"CAPA-2024-089","timeline":"3-4 weeks",
+     "avg_rul_km":15200},
+    {"id":"RCA-2024-002","component":"Drive Chain","priority":"Medium","frequency":23,
+     "affected_vehicles":23,"root_cause":"Lubrication interval inadequate for high-dust environments",
+     "recommendation":"Reduce recommended lubrication interval from 3000km to 1500km for dust-prone regions",
+     "supplier":"DriveLink Components","supplier_code":"DLC-CH-STD",
+     "projected_savings":"₹8.1L","capa_ticket":"CAPA-2024-091","timeline":"2 weeks",
+     "avg_rul_km":12800},
+    {"id":"RCA-2024-003","component":"Battery","priority":"High","frequency":31,
+     "affected_vehicles":31,"root_cause":"Charging algorithm not optimized for fast-charge usage patterns",
+     "recommendation":"Update ECU charging protocol via OTA update v2.3.1",
+     "supplier":"PowerCell Systems","supplier_code":"PCS-BAT-12V",
+     "projected_savings":"₹20.0L","capa_ticket":"CAPA-2024-094","timeline":"1-2 weeks",
+     "avg_rul_km":28000},
+]
+
+@app.route('/api/manufacturing-insights')
+def api_manufacturing_insights():
+    return jsonify(MANUFACTURING_INSIGHTS)
