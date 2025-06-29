@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Service Centers - VAHA{% endblock %}
+{% block content %}
+<div class="container">
+    <h1 style="color:white;margin-bottom:2rem;font-size:2.5rem;font-weight:800;">Service Center Network</h1>
+    <div id="centers-container"></div>
+</div>
+<script>
+async function loadServiceCenters() {
+    const r = await fetch('/api/service-centers');
+    const centers = await r.json();
+    document.getElementById('centers-container').innerHTML = centers.map(c => `
+        <div class="card">
+            <div class="card-header">
+                <div><h2 style="font-size:1.5rem;margin-bottom:0.5rem;">${c.name}</h2><p style="color:#6b7280;">${c.address}</p></div>
+                <div style="text-align:right;"><div style="font-size:2rem;font-weight:700;color:${c.current_load/c.capacity>0.8?'#ef4444':'#10b981'};">${Math.round(c.current_load/c.capacity*100)}%</div><div style="font-size:0.875rem;color:#6b7280;">Current Load</div></div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-bottom:1.5rem;">
+                <div><div style="font-size:0.875rem;color:#6b7280;">Phone</div><div style="font-weight:600;">${c.phone}</div></div>
+                <div><div style="font-size:0.875rem;color:#6b7280;">Capacity</div><div style="font-weight:600;">${c.current_load} / ${c.capacity} bays</div></div>
+                <div><div style="font-size:0.875rem;color:#6b7280;">Rating</div><div style="font-weight:600;">⭐ ${c.avg_rating} / 5.0</div></div>
+            </div>
+            <div style="margin-bottom:1.5rem;"><h3 style="font-size:1rem;margin-bottom:1rem;">Services</h3><div style="display:flex;gap:0.5rem;flex-wrap:wrap;">${c.services.map(s=>`<span class="badge badge-info">${s}</span>`).join('')}</div></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                <div><div style="font-size:0.75rem;color:#6b7280;margin-bottom:0.5rem;">Weekday</div><div style="display:flex;align-items:center;gap:0.5rem;"><div class="progress-bar" style="flex:1;"><div class="progress-fill success" style="width:${Math.min(c.weekday_util,100)}%;"></div></div><span style="font-weight:600;font-size:0.875rem;">${c.weekday_util}%</span></div></div>
+                <div><div style="font-size:0.75rem;color:#6b7280;margin-bottom:0.5rem;">Weekend</div><div style="display:flex;align-items:center;gap:0.5rem;"><div class="progress-bar" style="flex:1;"><div class="progress-fill ${c.weekend_util>100?'danger':'warning'}" style="width:${Math.min(c.weekend_util,100)}%;"></div></div><span style="font-weight:600;font-size:0.875rem;">${c.weekend_util}%</span></div></div>
+            </div>
+            ${c.weekend_util>100?'<div class="alert alert-warning" style="margin-top:1rem;">⚠️ Weekend overbooking detected. Consider load balancing.</div>':''}
+        </div>`).join('');
+}
+loadServiceCenters();
+</script>
+{% endblock %}
