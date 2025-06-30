@@ -204,3 +204,9 @@ def api_ueba_action():
         if alert['id'] == alert_id:
             alert['status'] = 'Quarantined' if action == 'quarantine' else 'Dismissed'
     return jsonify({'success': True, 'message': f'Alert {alert_id} {action}d successfully'})
+
+# fix: add request path to base template context
+@app.context_processor
+def inject_request_path():
+    from flask import request
+    return {'request': request}
