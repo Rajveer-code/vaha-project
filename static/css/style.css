@@ -107,3 +107,6 @@ tr:hover { background:var(--light); }
 .sentiment-friendly,.sentiment-satisfied,.sentiment-caring { background:#d1fae5; color:#065f46; }
 .sentiment-neutral { background:#e5e7eb; color:#374151; }
 .sentiment-informative { background:#dbeafe; color:#1e40af; }
+.alert-quarantined { opacity:0.6;filter:grayscale(50%);pointer-events:none; }
+.alert-dismissed { opacity:0.4;filter:grayscale(80%);pointer-events:none; }
+.alert-actions { display:flex;gap:0.5rem;margin-top:1rem; }
