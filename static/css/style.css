@@ -110,3 +110,6 @@ tr:hover { background:var(--light); }
 .alert-quarantined { opacity:0.6;filter:grayscale(50%);pointer-events:none; }
 .alert-dismissed { opacity:0.4;filter:grayscale(80%);pointer-events:none; }
 .alert-actions { display:flex;gap:0.5rem;margin-top:1rem; }
+.counting { display:inline-block; transition:transform 0.3s ease; }
+.counting.pulse { animation:count-pulse 0.5s ease; }
+@keyframes count-pulse { 0%,100%{transform:scale(1);}50%{transform:scale(1.1);} }
