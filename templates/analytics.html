@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Analytics - VAHA{% endblock %}
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const roiCtx = document.getElementById('roi-chart').getContext('2d');
+    new Chart(roiCtx, {
+        type:'bar',
+        data:{
+            labels:['Baseline Cost','Prevented Breakdowns','Net Savings'],
+            datasets:[{label:'Amount (₹)',data:[600000,-420000,420000],backgroundColor:['rgba(239,68,68,0.7)','rgba(16,185,129,0.7)','rgba(59,130,246,0.7)'],borderColor:['rgb(239,68,68)','rgb(16,185,129)','rgb(59,130,246)'],borderWidth:2}]
+        },
+        options:{responsive:true,plugins:{legend:{display:false},title:{display:true,text:'Annual ROI Calculation (1000 Vehicles)'}},scales:{y:{beginAtZero:true,ticks:{callback:v=>'₹'+v.toLocaleString()}}}}
+    });
+    const kpiCtx = document.getElementById('kpi-chart').getContext('2d');
+    new Chart(kpiCtx, {
+        type:'radar',
+        data:{
+            labels:['RUL Accuracy','Conversion Rate','Service Efficiency','CAPA Speed','NPS Improvement'],
+            datasets:[{label:'Target',data:[85,70,80,85,75],borderColor:'rgba(156,163,175,0.5)',backgroundColor:'rgba(156,163,175,0.1)',borderWidth:2},{label:'Current',data:[91,78,85,70,88],borderColor:'rgb(16,185,129)',backgroundColor:'rgba(16,185,129,0.3)',borderWidth:3}]
+        },
+        options:{responsive:true,scales:{r:{beginAtZero:true,max:100}}}
+    });
+});
+</script>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h1 style="color:white;margin-bottom:2rem;font-size:2.5rem;font-weight:800;">Business Analytics & ROI</h1>
+    <div class="card">
+        <div class="card-header"><h2 class="card-title">ROI Calculation (Conservative Estimate)</h2></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+            <div style="padding:1rem;background:#f9fafb;border-radius:0.75rem;">
+                <h3 style="margin-bottom:1rem;">Key Assumptions</h3>
+                <ul style="line-height:1.8;color:#4b5563;"><li>1,000 vehicle sample fleet</li><li>₹3,000 per unplanned breakdown event</li><li>0.2 avg breakdowns per vehicle per year</li></ul>
+                <div style="padding:1.5rem;background:white;border-radius:0.5rem;border-left:4px solid #10b981;margin-top:1rem;">
+                    <p>Baseline cost = 200 events × ₹3,000 = <strong>₹6,00,000</strong></p>
+                    <p>VAHA reduces events by 70% → saves <strong>₹4,20,000</strong></p>
+                </div>
+            </div>
+            <div style="padding:1rem;"><canvas id="roi-chart" height="300"></canvas></div>
+        </div>
+    </div>
+    <div class="grid-3">
+        <div class="card"><h3 style="margin-bottom:1rem;">Customer Uptime</h3><div style="font-size:2.5rem;font-weight:700;color:#10b981;">70-85%</div><p style="color:#6b7280;">Reduction in unplanned breakdowns</p></div>
+        <div class="card"><h3 style="margin-bottom:1rem;">HERA Effectiveness</h3><div style="font-size:2.5rem;font-weight:700;color:#8b5cf6;">78%</div><p style="color:#6b7280;">Voice call conversion rate</p></div>
+        <div class="card"><h3 style="margin-bottom:1rem;">Manufacturing ROI</h3><div style="font-size:2.5rem;font-weight:700;color:#f59e0b;">₹40.6L</div><p style="color:#6b7280;">Annual warranty cost reduction</p></div>
+        <div class="card"><h3 style="margin-bottom:1rem;">Service Efficiency</h3><div style="font-size:2.5rem;font-weight:700;color:#3b82f6;">25-40%</div><p style="color:#6b7280;">Better load distribution</p></div>
+        <div class="card"><h3 style="margin-bottom:1rem;">NPS Improvement</h3><div style="font-size:2.5rem;font-weight:700;color:#ec4899;">+35</div><p style="color:#6b7280;">Net Promoter Score gain</p></div>
+        <div class="card"><h3 style="margin-bottom:1rem;">Security Compliance</h3><div style="font-size:2.5rem;font-weight:700;color:#ef4444;">99.84%</div><p style="color:#6b7280;">Agent compliance rate</p></div>
+    </div>
+    <div class="card">
+        <div class="card-header"><h2 class="card-title">KPI Performance vs Target</h2></div>
+        <div style="max-width:600px;margin:0 auto;padding:2rem;"><canvas id="kpi-chart"></canvas></div>
+    </div>
+    <div class="card">
+        <div class="card-header"><h2 class="card-title">Key Performance Indicators</h2></div>
+        <table>
+            <thead><tr><th>Metric</th><th>Target</th><th>Current</th><th>Status</th></tr></thead>
+            <tbody>
+                <tr><td>RUL Prediction Accuracy</td><td>> 85%</td><td>91%</td><td><span class="badge badge-success">Achieved</span></td></tr>
+                <tr><td>Voice Appointment Conversion</td><td>60-80%</td><td>78%</td><td><span class="badge badge-success">On Track</span></td></tr>
+                <tr><td>Weekend Overbooking</td><td>< 120%</td><td>140%</td><td><span class="badge badge-warning">Needs Improvement</span></td></tr>
+                <tr><td>CAPA Closure Time</td><td>< 10 days</td><td>12 days</td><td><span class="badge badge-warning">Improving</span></td></tr>
+                <tr><td>NPS Improvement</td><td>+20 to +40</td><td>+35</td><td><span class="badge badge-success">Excellent</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
