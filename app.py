@@ -210,3 +210,7 @@ def api_ueba_action():
 def inject_request_path():
     from flask import request
     return {'request': request}
+
+# fix: update base template with proper active nav logic
+# nothing code-wise, but note: context_processor already injecting request
+print("VAHA app loaded successfully")
