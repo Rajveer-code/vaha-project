@@ -113,3 +113,7 @@ tr:hover { background:var(--light); }
 .counting { display:inline-block; transition:transform 0.3s ease; }
 .counting.pulse { animation:count-pulse 0.5s ease; }
 @keyframes count-pulse { 0%,100%{transform:scale(1);}50%{transform:scale(1.1);} }
+#agent-log { scrollbar-width:thin; scrollbar-color:#10b981 #1f2937; }
+#agent-log::-webkit-scrollbar { width:8px; }
+#agent-log::-webkit-scrollbar-track { background:#1f2937; }
+#agent-log::-webkit-scrollbar-thumb { background:#10b981; border-radius:4px; }
