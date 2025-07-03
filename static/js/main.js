@@ -35,3 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const _s = document.createElement('style');
 _s.textContent = '@keyframes slideInRight{from{opacity:0;transform:translateX(100px);}to{opacity:1;transform:translateX(0);}}';
 document.head.appendChild(_s);
+
+// Expose countUp globally for use in inline scripts
+window.countUp = countUp;
+window.showToast = showToast;
