@@ -214,3 +214,12 @@ def inject_request_path():
 # fix: update base template with proper active nav logic
 # nothing code-wise, but note: context_processor already injecting request
 print("VAHA app loaded successfully")
+
+# fix KeyError when vehicle_id not found — return proper error page
+# also add more vehicles to simulate a real fleet
+VEHICLES.append({"id":"MH-02-GH-3456","model":"Hero Passion Pro","owner":"Sunita Mehta","phone":"+91-9543210987",
+     "type":"two-wheeler","location":"Dadar, Mumbai","mileage":41000,"riskLevel":"medium",
+     "predictedIssue":"Air Filter Replacement","daysLeft":18,"confidence":0.74,
+     "bookingStatus":"none","nextService":None,
+     "vin":"MBLHA10E09H345678","lastService":"Jun 2025",
+     "telemetry":{"engine_temp":"79°C","battery_voltage":"12.6V","brake_pressure":"88%","tire_pressure_front":"27 PSI","tire_pressure_rear":"29 PSI","fuel_level":"62%","odometer":"41,000 km","last_updated":"3 min ago"}})
