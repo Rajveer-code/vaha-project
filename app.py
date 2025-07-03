@@ -223,3 +223,10 @@ VEHICLES.append({"id":"MH-02-GH-3456","model":"Hero Passion Pro","owner":"Sunita
      "bookingStatus":"none","nextService":None,
      "vin":"MBLHA10E09H345678","lastService":"Jun 2025",
      "telemetry":{"engine_temp":"79°C","battery_voltage":"12.6V","brake_pressure":"88%","tire_pressure_front":"27 PSI","tire_pressure_rear":"29 PSI","fuel_level":"62%","odometer":"41,000 km","last_updated":"3 min ago"}})
+
+# gunicorn entrypoint
+if __name__ != '__main__':
+    import logging
+    gunicorn_logger = logging.getLogger('gunicorn.error')
+    app.logger.handlers = gunicorn_logger.handlers
+    app.logger.setLevel(gunicorn_logger.level)
