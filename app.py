@@ -235,3 +235,7 @@ if __name__ != '__main__':
 @app.errorhandler(404)
 def page_not_found(e):
     return f'<h2 style="font-family:sans-serif;text-align:center;margin-top:4rem;color:#667eea;">Page not found — <a href="/">Go home</a></h2>', 404
+
+# ensure secret key and debug mode are env-driven in prod
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'vaha-dev-secret-2025')
+app.config['DEBUG'] = os.environ.get('FLASK_DEBUG', 'false').lower() == 'true'
