@@ -33,3 +33,7 @@ async function loadManufacturingInsights() {
     } catch(e) { console.error(e); }
 }
 document.addEventListener('DOMContentLoaded', loadManufacturingInsights);
+
+function generateCAPA(insightId) { showToast(`Generating CAPA for ${insightId}...`,'success'); }
+function viewAnalysis(insightId) { showToast(`Opening full analysis for ${insightId}...`,'info'); }
+function contactSupplier(code) { showToast(`Initiating supplier contact: ${code}...`,'info'); }
