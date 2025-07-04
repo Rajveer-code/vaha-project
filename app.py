@@ -230,3 +230,8 @@ if __name__ != '__main__':
     gunicorn_logger = logging.getLogger('gunicorn.error')
     app.logger.handlers = gunicorn_logger.handlers
     app.logger.setLevel(gunicorn_logger.level)
+
+# handle 404
+@app.errorhandler(404)
+def page_not_found(e):
+    return f'<h2 style="font-family:sans-serif;text-align:center;margin-top:4rem;color:#667eea;">Page not found — <a href="/">Go home</a></h2>', 404
