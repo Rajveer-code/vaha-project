@@ -118,3 +118,5 @@ tr:hover { background:var(--light); }
 #agent-log::-webkit-scrollbar-track { background:#1f2937; }
 #agent-log::-webkit-scrollbar-thumb { background:#10b981; border-radius:4px; }
 @media(max-width:1024px){.nav-links{gap:1rem;}.nav-links a{padding:0.4rem 0.75rem;font-size:0.875rem;}}
+footer a { color:rgba(255,255,255,0.7); text-decoration:none; }
+footer a:hover { color:white; text-decoration:underline; }
