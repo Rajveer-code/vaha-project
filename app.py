@@ -239,3 +239,5 @@ def page_not_found(e):
 # ensure secret key and debug mode are env-driven in prod
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'vaha-dev-secret-2025')
 app.config['DEBUG'] = os.environ.get('FLASK_DEBUG', 'false').lower() == 'true'
+
+# --- end of app.py ---
