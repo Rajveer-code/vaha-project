@@ -17,3 +17,16 @@ python create_audio.py
 
 ## Deploy
 Configured for gunicorn / Render / AWS EB.
+
+## Live Demo
+Deployed on Render. See hackathon submission for link.
+
+## Pages
+- `/` — Landing
+- `/dashboard` — Live fleet monitoring
+- `/vehicles` — Fleet management
+- `/hera` — Voice AI demo
+- `/service-centers` — Center utilization
+- `/manufacturing` — RCA/CAPA insights
+- `/ueba` — Security dashboard
+- `/analytics` — ROI and KPIs
